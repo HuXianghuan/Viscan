@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="950.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.viscan.controller.K2BuildController">
+    <tabs>
+        <Tab fx:id="thisTab" text="k2 build">
+            <content>
+                <AnchorPane fx:id="tabRoot">
+                    <children>
+                  <ScrollPane fitToWidth="true" layoutX="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <StackPane>
+                           <children>
+                                      <VBox>
+                                          <children>
+                                              <HBox alignment="CENTER" prefHeight="57.0">
+                                                  <children>
+                                                      <Label text="k2 build" HBox.hgrow="ALWAYS">
+                                                          <font>
+                                                              <Font name="System Bold" size="18.0" />
+                                                          </font>
+                                                      </Label>
+                                                  </children>
+                                              </HBox>
+                                              <HBox alignment="CENTER">
+                                                  <children>
+                                                      <TitledPane animated="false" text="Basic Parameters" HBox.hgrow="ALWAYS">
+                                                          <content>
+                                                              <AnchorPane>
+                                                                  <children>
+                                                                      <GridPane alignment="CENTER" hgap="10.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                          <columnConstraints>
+                                                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
+                                                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" />
+                                                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
+                                                                          </columnConstraints>
+                                                                          <rowConstraints>
+                                                                              <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                                                          </rowConstraints>
+                                                                          <padding>
+                                                                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                          </padding>
+                                                         <children>
+                                                            <Label text="Database build directory:">
+                                                               <tooltip>
+                                                                  <Tooltip text="Pathname to Kraken2 database." />
+                                                               </tooltip></Label>
+                                                            <TextField fx:id="databaseDirField" GridPane.columnIndex="1" />
+                                                         </children>
+                                                                      </GridPane>
+                                                                  </children>
+                                                              </AnchorPane>
+                                                          </content>
+                                                      </TitledPane>
+                                                  </children>
+                                              </HBox>
+                                              <HBox alignment="CENTER">
+                                                  <children>
+                                                      <TitledPane animated="false" text="Advanced Parameters" HBox.hgrow="ALWAYS">
+                                                          <content>
+                                                              <AnchorPane minHeight="0.0" minWidth="0.0">
+                                                   <children>
+                                                      <GridPane alignment="CENTER" hgap="10.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" percentWidth="60.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                         <children>
+                                                            <Label text="Threads:">
+                                                               <tooltip>
+                                                                  <Tooltip text="Number of worker threads." />
+                                                               </tooltip></Label>
+                                                            <TextField fx:id="threadsField" GridPane.columnIndex="1" />
+                                                            <Label text="Execution options:" GridPane.rowIndex="4" />
+                                                            <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                               <children>
+                                                                  <CheckBox fx:id="fastBuildCheck" mnemonicParsing="false" text="Fast build">
+                                                                     <tooltip>
+                                                                        <Tooltip text="Do not require database to be deterministically built when using multiple threads. This is faster, but does introduce variability in minimizer/LCA pairs." />
+                                                                     </tooltip></CheckBox>
+                                                                  <CheckBox fx:id="proteinCheck" mnemonicParsing="false" text="Protein">
+                                                                     <tooltip>
+                                                                        <Tooltip text="Build a protein database for translated search." />
+                                                                     </tooltip></CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                            <Label text="Kmer length:" GridPane.rowIndex="1">
+                                                               <tooltip>
+                                                                  <Tooltip text="K-mer length in bp/aa." />
+                                                               </tooltip></Label>
+                                                            <Label text="Minimizer length:" GridPane.rowIndex="2">
+                                                               <tooltip>
+                                                                  <Tooltip text="Minimizer length in bp/aa." />
+                                                               </tooltip></Label>
+                                                            <TextField fx:id="kmerLenField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                            <TextField fx:id="minimizerLenField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                            <TextField fx:id="maxDbSizeField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                            <Label text="Max database size:" GridPane.rowIndex="3">
+                                                               <tooltip>
+                                                                  <Tooltip text="Maximum number of bytes for Kraken 2 hash table; if the estimator determines more would normally be needed, the reference library will be downsampled to fit." />
+                                                               </tooltip></Label>
+                                                         </children>
+                                                      </GridPane>
+                                                   </children></AnchorPane>
+                                                          </content>
+                                                      </TitledPane>
+                                                  </children>
+                                              </HBox>
+                                              <HBox alignment="CENTER">
+                                                  <children>
+                                                      <TitledPane animated="false" text="Command Preview" HBox.hgrow="ALWAYS">
+                                                          <content>
+                                                              <AnchorPane minHeight="0.0" minWidth="0.0">
+                                                   <children>
+                                                      <GridPane hgap="10.0" layoutX="9.600000381469727" layoutY="9.600000381469727" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints vgrow="SOMETIMES" />
+                                                            <RowConstraints vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <children>
+                                                            <TextArea fx:id="commandTextArea" GridPane.columnSpan="2" />
+                                                            <AnchorPane GridPane.rowIndex="1">
+                                                               <children>
+                                                                  <Button fx:id="generateButton" mnemonicParsing="false" onAction="#generateCommand" text="Generate" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <padding>
+                                                                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                                                     </padding>
+                                                                  </Button>
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                               <children>
+                                                                  <Button mnemonicParsing="false" onAction="#commandRun" text="Run" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <padding>
+                                                                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                                                     </padding>
+                                                                  </Button>
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </children>
+                                                      </GridPane>
+                                                   </children></AnchorPane>
+                                                          </content>
+                                                      </TitledPane>
+                                                  </children>
+                                              </HBox>
+                                          </children>
+                                      </VBox>
+                           </children>
+                        </StackPane>
+                     </content>
+                     <padding>
+                        <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                     </padding>
+                  </ScrollPane>
+                    </children>
+            </AnchorPane>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>

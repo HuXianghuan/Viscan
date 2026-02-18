@@ -1,0 +1,12 @@
+module com.viscan.viscan {
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires java.logging;
+    requires com.jfoenix;
+
+
+    opens com.viscan to javafx.fxml;
+    exports com.viscan;
+    exports com.viscan.controller;
+    opens com.viscan.controller to javafx.fxml;
+}

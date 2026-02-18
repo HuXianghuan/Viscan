@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="914.0" prefWidth="981.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.viscan.controller.K2ClassifyController">
+    <tabs>
+        <Tab fx:id="thisTab" text="k2 classify">
+            <content>
+                <AnchorPane fx:id="tabRoot">
+                    <children>
+                  <ScrollPane fitToWidth="true" layoutX="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <StackPane>
+                           <children>
+                                      <VBox>
+                                          <children>
+                                              <HBox alignment="CENTER" prefHeight="57.0">
+                                                  <children>
+                                                      <Label text="k2 classify" HBox.hgrow="ALWAYS">
+                                                          <font>
+                                                              <Font name="System Bold" size="18.0" />
+                                                          </font>
+                                                      </Label>
+                                                  </children>
+                                              </HBox>
+                                              <HBox alignment="CENTER">
+                                                  <children>
+                                                      <TitledPane animated="false" text="Basic Parameters" HBox.hgrow="ALWAYS">
+                                                          <content>
+                                                              <AnchorPane>
+                                                                  <children>
+                                                                      <GridPane alignment="CENTER" hgap="10.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                          <columnConstraints>
+                                                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
+                                                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" />
+                                                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" />
+                                                                          </columnConstraints>
+                                                                          <rowConstraints>
+                                                                              <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                                                              <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                                                          </rowConstraints>
+                                                                          <padding>
+                                                                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                          </padding>
+                                                         <children>
+                                                            <Label text="Sequencing type:">
+                                                               <tooltip>
+                                                                  <Tooltip text="Select whether the input FASTQ files are single-end (one FASTQ file)or paired-end (two FASTQ files: R1 and R2)." />
+                                                               </tooltip></Label>
+                                                            <VBox GridPane.columnIndex="1">
+                                                               <children>
+                                                                  <RadioButton mnemonicParsing="false" text="Single">
+                                                                     <toggleGroup>
+                                                                        <ToggleGroup fx:id="sequencingType" />
+                                                                     </toggleGroup>
+                                                                  </RadioButton>
+                                                                  <RadioButton fx:id="pairedRadio" mnemonicParsing="false" selected="true" text="Paired" toggleGroup="$sequencingType" />
+                                                               </children>
+                                                            </VBox>
+                                                            <ListView fx:id="inputListView" editable="true" prefHeight="75.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                            <Label text="FASTQ input file path:" GridPane.rowIndex="1">
+                                                               <tooltip>
+                                                                  <Tooltip text="Path to the uncompressed plain-text FASTQ file(s)." />
+                                                               </tooltip></Label>
+                                                            <Label text="Database directory:" GridPane.rowIndex="2">
+                                                               <tooltip>
+                                                                  <Tooltip text="Directory for the Kraken2 database index. Must contain at least these files: hash.k2d, opts.k2d, taxo.k2d. You can either download a pre-built index or build one using Kraken2 commands: `download-library`, `download-taxonomy`, and `build`." />
+                                                               </tooltip></Label>
+                                                            <Label text="Output directory:" GridPane.rowIndex="3">
+                                                               <tooltip>
+                                                                  <Tooltip text="Output directory for classification results and optional output files." />
+                                                               </tooltip></Label>
+                                                            <TextField fx:id="outputDirTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                            <Label text="Output files:" GridPane.rowIndex="4" />
+                                                            <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                               <children>
+                                                                  <CheckBox fx:id="demandClassificationCheck" mnemonicParsing="false" selected="true" text="Classification results" />
+                                                                  <CheckBox fx:id="demandReportCheck" mnemonicParsing="false" text="Taxonomic summary report" />
+                                                                  <CheckBox fx:id="demandClassifiedCheck" mnemonicParsing="false" text="Classified reads (FASTQ)" />
+                                                                  <CheckBox fx:id="demandUnclassifiedCheck" mnemonicParsing="false" text="Unclassified reads (FASTQ)" />
+                                                               </children>
+                                                            </VBox>
+                                                            <TextField fx:id="databaseDirTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                            <HBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                               <children>
+                                                                  <Button mnemonicParsing="false" onAction="#handleClear" text="Clear" userData="inputListView" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                                      </GridPane>
+                                                                  </children>
+                                                              </AnchorPane>
+                                                          </content>
+                                                      </TitledPane>
+                                                  </children>
+                                              </HBox>
+                                              <HBox alignment="CENTER">
+                                                  <children>
+                                                      <TitledPane animated="false" text="Advanced Parameters" HBox.hgrow="ALWAYS">
+                                                          <content>
+                                                              <AnchorPane minHeight="0.0" minWidth="0.0">
+                                                   <children>
+                                                      <GridPane alignment="CENTER" hgap="10.0" layoutX="9.0" layoutY="9.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" percentWidth="60.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                         <children>
+                                                            <Label text="Threads:">
+                                                               <tooltip>
+                                                                  <Tooltip text="Number of worker threads." />
+                                                               </tooltip></Label>
+                                                            <TextField fx:id="threadTextField" GridPane.columnIndex="1" />
+                                                            <Label text="Execution options:" GridPane.rowIndex="2" />
+                                                            <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                               <children>
+                                                                  <CheckBox fx:id="memoryMappingCheck" mnemonicParsing="false" selected="true" text="Memory mapping">
+                                                                     <tooltip>
+                                                                        <Tooltip text="Avoids loading entire database into RAM." />
+                                                                     </tooltip></CheckBox>
+                                                                  <CheckBox fx:id="quickCheck" mnemonicParsing="false" text="Quick">
+                                                                     <tooltip>
+                                                                        <Tooltip text="Quick operation (use first hit or hits)." />
+                                                                     </tooltip></CheckBox>
+                                                                  <CheckBox fx:id="useNamesCheck" mnemonicParsing="false" text="Use names">
+                                                                     <tooltip>
+                                                                        <Tooltip text="Print scientific names instead of just taxids." />
+                                                                     </tooltip></CheckBox>
+                                                               </children>
+                                                            </VBox>
+                                                            <Label text="Confidence threshold:" GridPane.rowIndex="1">
+                                                               <tooltip>
+                                                                  <Tooltip text="Confidence threshold for Kraken2 classification (0-1). Higher values make the classifier more conservative; sequences may be unclassified if no label meets the threshold." />
+                                                               </tooltip></Label>
+                                                            <TextField fx:id="confidenceTextField" promptText="[0,1]" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                         </children>
+                                                      </GridPane>
+                                                   </children></AnchorPane>
+                                                          </content>
+                                                      </TitledPane>
+                                                  </children>
+                                              </HBox>
+                                              <HBox alignment="CENTER">
+                                                  <children>
+                                                      <TitledPane animated="false" text="Command Preview" HBox.hgrow="ALWAYS">
+                                                          <content>
+                                                              <AnchorPane minHeight="0.0" minWidth="0.0">
+                                                   <children>
+                                                      <GridPane hgap="10.0" layoutX="9.600000381469727" layoutY="9.600000381469727" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints vgrow="SOMETIMES" />
+                                                            <RowConstraints vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <children>
+                                                            <TextArea fx:id="commandTextArea" GridPane.columnSpan="2" />
+                                                            <AnchorPane GridPane.rowIndex="1">
+                                                               <children>
+                                                                  <Button fx:id="generateButton" mnemonicParsing="false" onAction="#generateCommand" text="Generate" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <padding>
+                                                                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                                                     </padding>
+                                                                  </Button>
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                               <children>
+                                                                  <Button mnemonicParsing="false" onAction="#commandRun" text="Run" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <padding>
+                                                                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                                                     </padding>
+                                                                  </Button>
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </children>
+                                                      </GridPane>
+                                                   </children></AnchorPane>
+                                                          </content>
+                                                      </TitledPane>
+                                                  </children>
+                                              </HBox>
+                                          </children>
+                                      </VBox>
+                           </children>
+                        </StackPane>
+                     </content>
+                     <padding>
+                        <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                     </padding>
+                  </ScrollPane>
+                    </children>
+            </AnchorPane>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>

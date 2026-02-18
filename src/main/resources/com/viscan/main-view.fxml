@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="712.0" prefWidth="1011.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.viscan.controller.MainController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <MenuBar BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="Tools">
+                  <items>
+                        <MenuItem id="fastp" mnemonicParsing="false" onAction="#handleMenuAction" text="fastp" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem id="bowtie2" mnemonicParsing="false" onAction="#handleMenuAction" text="Bowtie2" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem id="k2-classify" mnemonicParsing="false" onAction="#handleMenuAction" text="k2 classify" />
+                        <MenuItem id="k2-download-library" mnemonicParsing="false" onAction="#handleMenuAction" text="k2 download-library" />
+                        <MenuItem id="k2-download-taxonomy" mnemonicParsing="false" onAction="#handleMenuAction" text="k2 download-taxonomy" />
+                        <MenuItem id="k2-build" mnemonicParsing="false" onAction="#handleMenuAction" text="k2 build" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem id="rcf" mnemonicParsing="false" onAction="#handleMenuAction" text="Recentrifuge" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Flow">
+                    <items>
+                        <MenuItem id="flow1" mnemonicParsing="false" onAction="#handleMenuAction" text="Flow1" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Setting">
+                    <items>
+                        <MenuItem id="config" mnemonicParsing="false" onAction="#handleMenuAction" text="global config" />
+                        <MenuItem id="status" mnemonicParsing="false" onAction="#handleMenuAction" text="status" />
+                        <MenuItem id="install" mnemonicParsing="false" onAction="#handleMenuAction" text="install" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+         <center>
+            <SplitPane dividerPositions="0.2" BorderPane.alignment="CENTER">
+               <items>
+                  <BorderPane>
+                     <center>
+                        <ListView fx:id="mainListView" editable="true" />
+                     </center>
+                     <top>
+                        <ButtonBar buttonMinWidth="10.0" prefHeight="31.0" prefWidth="198.0" BorderPane.alignment="CENTER">
+                          <buttons>
+                              <ToggleButton fx:id="reorderButton" mnemonicParsing="false" text="Reorder" />
+                            <Button fx:id="fileAddButton" alignment="CENTER" mnemonicParsing="false" onAction="#addFileToList" text="File" />
+                              <Button fx:id="dirAddButton" alignment="CENTER" mnemonicParsing="false" onAction="#addDirToList" text="Folder" />
+                          </buttons>
+                           <BorderPane.margin>
+                              <Insets left="8.0" right="8.0" />
+                           </BorderPane.margin>
+                        </ButtonBar>
+                     </top>
+                  </BorderPane>
+                  <TabPane fx:id="tabPane" tabClosingPolicy="ALL_TABS" />
+               </items>
+            </SplitPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

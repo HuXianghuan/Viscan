@@ -1,0 +1,11 @@
+
+.list-cell.list-header-cell {
+    -fx-font-weight: bold;
+    -fx-background-color: #e0bdb5;
+    -fx-text-fill: black;
+}
+
+.list-cell.list-header-cell:selected {
+    -fx-background-color: #e0bdb5;
+    -fx-text-fill: black;
+}

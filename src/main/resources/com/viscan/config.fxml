@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="950.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.viscan.controller.ConfigController">
+    <tabs>
+        <Tab fx:id="config" text="global config">
+            <content>
+                <AnchorPane fx:id="tabRoot">
+                    <children>
+                        <ScrollPane fitToWidth="true" layoutX="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <content>
+                                <StackPane>
+                           <children>
+                              <GridPane>
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="WSL executable:" />
+                                    <Label text="fastp executable:" GridPane.rowIndex="1" />
+                                    <Label text="Default threads:" GridPane.rowIndex="6" />
+                                    <TextField fx:id="wslExexutableField" GridPane.columnIndex="1" />
+                                    <TextField fx:id="fastpExecutableDirField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="threadNumberField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <Label text="Work directory:" GridPane.rowIndex="5" />
+                                    <TextField fx:id="workDirField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <HBox alignment="CENTER" GridPane.rowIndex="17">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#saveButtonOnAction" text="save" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="17">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#resetButtonOnAction" text="reset" />
+                                       </children>
+                                    </HBox>
+                                    <Label text="Tag for Bowtie2 unaligned reads files:" GridPane.rowIndex="10" />
+                                    <Label text="Tag for fastp cleaned reads files:" GridPane.rowIndex="9" />
+                                    <TextField fx:id="fastpCleanTagField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                    <TextField fx:id="bowtie2UnalignTagField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                                    <Label text="Tag for Bowtie2 aligned reads files:" GridPane.rowIndex="11" />
+                                    <TextField fx:id="bowtie2AlignTagField" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                                    <Label text="WSL distro:" GridPane.rowIndex="16" />
+                                    <TextField fx:id="wslDistroField" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                                    <Label text="Bowtie2 executable directory:" GridPane.rowIndex="2" />
+                                    <TextField fx:id="bowtie2ExecutableDirField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label text="Kraken2 executable directory:" GridPane.rowIndex="3" />
+                                    <TextField fx:id="kraken2ExcutableDirField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label text="Tag for Kraken2 classified reads files:" GridPane.rowIndex="13" />
+                                    <Label text="Tag for Kraken2 Taxonomic report files:" GridPane.rowIndex="12" />
+                                    <TextField fx:id="kraken2ClassifiedTagField" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                                    <TextField fx:id="kraken2ReportTagField" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                                    <Label text="Recentrifuge executable directory:" GridPane.rowIndex="4" />
+                                    <TextField fx:id="recentrifugeExecutableDirField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label text="Tag for Kraken2 unclassified reads files:" GridPane.rowIndex="14" />
+                                    <TextField fx:id="kraken2UnclassifiedTagField" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                                </StackPane>
+                            </content>
+                            <padding>
+                                <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+                            </padding>
+                        </ScrollPane>
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>

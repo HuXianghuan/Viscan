@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viscan 用户手册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f5f7fa;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            left: 0;
+            top: 0;
+        }
+
+        .sidebar h2 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #34495e;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #bdc3c7;
+            text-decoration: none;
+            padding: 10px 12px;
+            margin: 5px 0;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background: #34495e;
+            color: #fff;
+        }
+
+        .sidebar .level-1 {
+            margin-bottom: 8px;
+        }
+
+        .sidebar .level-2 {
+            padding-left: 30px;
+            font-size: 0.9rem;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 40px 60px;
+            max-width: 1000px;
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            border-radius: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            padding: 5px;
+            z-index: 1000;
+            display: flex;
+            gap: 5px;
+        }
+
+        .lang-btn {
+            border: none;
+            background: transparent;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #7f8c8d;
+        }
+
+        .lang-btn.active {
+            background: #3498db;
+            color: #fff;
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: #e0e0e0;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #34495e;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 4px solid #3498db;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: #555;
+            margin-top: 35px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        ul li, ol li {
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: #3498db;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: "Consolas", "Monaco", monospace;
+            font-size: 0.9rem;
+            color: #e74c3c;
+        }
+
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+            font-size: 0.95rem;
+        }
+
+        .highlight-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 220px;
+            }
+
+            .main-content {
+                margin-left: 220px;
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .lang-switcher {
+                top: 10px;
+                right: 10px;
+            }
+
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('zh')">中文</button>
+        <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+    </div>
+
+    <div class="container">
+        <nav class="sidebar">
+            <h2 data-i18n="sidebar_title">Viscan 手册</h2>
+            <ul>
+                <li><a href="#intro" class="level-1"><span data-i18n="chapter_1">1 简介</span></a></li>
+                <li><a href="#what-is-viscan" class="level-2"><span data-i18n="section_1_1">1.1 什么是 Viscan？</span></a></li>
+                <li><a href="#environment" class="level-2"><span data-i18n="section_1_2">1.2 运行环境说明</span></a></li>
+                <li><a href="#tools-overview" class="level-2"><span data-i18n="section_1_3">1.3 支持的工具一览</span></a></li>
+                <li><a href="#install" class="level-1"><span data-i18n="chapter_2">2 安装与配置</span></a></li>
+                <li><a href="#quick-check" class="level-2"><span data-i18n="section_2_1">2.1 快速开始检查清单</span></a></li>
+                <li><a href="#install-tools" class="level-2"><span data-i18n="section_2_2">2.2 安装外部生信工具</span></a></li>
+                <li><a href="#config" class="level-2"><span data-i18n="section_2_3">2.3 配置 WSL 与工具路径</span></a></li>
+                <li><a href="#status" class="level-2"><span data-i18n="section_2_4">2.4 状态检查</span></a></li>
+                <li><a href="#quickstart" class="level-1"><span data-i18n="chapter_3">3 快速上手</span></a></li>
+                <li><a href="#interface" class="level-2"><span data-i18n="section_3_1">3.1 界面概览</span></a></li>
+                <li><a href="#preparation" class="level-2"><span data-i18n="section_3_2">3.2 分析前准备</span></a></li>
+                <li><a href="#workflow" class="level-2"><span data-i18n="section_3_3">3.3 标准分析流程</span></a></li>
+                <li><a href="#results" class="level-2"><span data-i18n="section_3_4">3.4 结果查看与判读</span></a></li>
+                <li><a href="#pathogen" class="level-2"><span data-i18n="section_3_5">3.5 病原判读建议</span></a></li>
+                <li><a href="#troubleshoot" class="level-1"><span data-i18n="chapter_4">4 错误排查</span></a></li>
+                <li><a href="#tool-not-found" class="level-2"><span data-i18n="section_4_1">4.1 工具未找到或不可用</span></a></li>
+                <li><a href="#wsl-fail" class="level-2"><span data-i18n="section_4_2">4.2 WSL 无法连接</span></a></li>
+                <li><a href="#file-path" class="level-2"><span data-i18n="section_4_3">4.3 数据文件或路径问题</span></a></li>
+                <li><a href="#cmd-error" class="level-2"><span data-i18n="section_4_4">4.4 分析命令执行错误</span></a></li>
+                <li><a href="#appendix" class="level-1"><span data-i18n="appendix">附录 A：WSL 配置与使用建议</span></a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <h1 id="intro" data-i18n="chapter_1">1 简介</h1>
+
+            <h2 id="what-is-viscan" data-i18n="section_1_1">1.1 什么是 Viscan？</h2>
+            <p data-i18n="viscan_desc">Viscan 是一款基于 JavaFX 的桌面应用程序，旨在简化 Windows 系统下通过 WSL2（Windows Subsystem for Linux 2）执行生物信息学工具的流程。它提供图形化界面，使用户能够在无需直接操作命令行的情况下从宏基因测序样本中识别病原物种。</p>
+
+            <p data-i18n="supported_tools_intro">Viscan 支持的主要工具包括：</p>
+            <ul>
+                <li><strong>fastp</strong> —— <span data-i18n="tool_fastp">高速全功能 FASTQ 数据预处理（质量控制、过滤和报告生成）</span></li>
+                <li><strong>Bowtie2</strong> —— <span data-i18n="tool_bowtie2">高速、内存高效的 DNA 读段比对工具，用于宿主去除或参考基因组比对</span></li>
+                <li><strong>Kraken2</strong> —— <span data-i18n="tool_kraken2">基于 k-mer 的宏基因组分类工具，可对读段进行快速物种鉴定</span></li>
+                <li><strong>Recentrifuge</strong> —— <span data-i18n="tool_recentrifuge">对 Kraken2 分类结果进行整理、统计和可视化，支持阴性对照比较</span></li>
+            </ul>
+
+            <h2 id="environment" data-i18n="section_1_2">1.2 运行环境说明</h2>
+            <p data-i18n="env_desc">Viscan 在以下环境中完成开发与测试：</p>
+            <table>
+                <tr>
+                    <th data-i18n="table_item">项目</th>
+                    <th data-i18n="table_env">环境</th>
+                </tr>
+                <tr>
+                    <td data-i18n="item_os">操作系统</td>
+                    <td>Windows 10</td>
+                </tr>
+                <tr>
+                    <td>WSL</td>
+                    <td>WSL2</td>
+                </tr>
+                <tr>
+                    <td>Java</td>
+                    <td>JDK 17</td>
+                </tr>
+                <tr>
+                    <td>RAM</td>
+                    <td>16 GB</td>
+                </tr>
+                <tr>
+                    <td>ROM</td>
+                    <td>≥50 GB</td>
+                </tr>
+            </table>
+            <p data-i18n="env_note">Viscan 理论上可在支持 WSL 的 Windows 系统上运行，但尚未在所有 Windows 版本或 WSL 版本上进行全面测试。</p>
+
+            <h2 id="tools-overview" data-i18n="section_1_3">1.3 支持的工具一览</h2>
+            <table>
+                <tr>
+                    <th data-i18n="table_tool">工具</th>
+                    <th data-i18n="table_function">功能说明</th>
+                </tr>
+                <tr>
+                    <td>fastp</td>
+                    <td data-i18n="func_fastp">FASTQ 数据质量控制与过滤，生成质控报告</td>
+                </tr>
+                <tr>
+                    <td>Bowtie2</td>
+                    <td data-i18n="func_bowtie2">读段与参考基因组的比对（常用于宿主去除）</td>
+                </tr>
+                <tr>
+                    <td>k2-classify</td>
+                    <td data-i18n="func_k2_classify">使用 Kraken2 进行序列分类鉴定</td>
+                </tr>
+                <tr>
+                    <td>k2-download-library</td>
+                    <td data-i18n="func_k2_download_lib">下载物种基因组参考序列</td>
+                </tr>
+                <tr>
+                    <td>k2-download-taxonomy</td>
+                    <td data-i18n="func_k2_download_tax">下载 NCBI 分类学信息</td>
+                </tr>
+                <tr>
+                    <td>k2-build</td>
+                    <td data-i18n="func_k2_build">根据现有的参考基因组序列构建 Kraken2 数据库索引</td>
+                </tr>
+                <tr>
+                    <td>Recentrifuge</td>
+                    <td data-i18n="func_recentrifuge">对分类结果进行置信度计算、多样品比较和可视化分析</td>
+                </tr>
+                <tr>
+                    <td>Flow1</td>
+                    <td data-i18n="func_flow1">顺序执行质控、宿主去除与病原分类的预设分析流程</td>
+                </tr>
+            </table>
+
+            <h1 id="install" data-i18n="chapter_2">2 安装与配置</h1>
+
+            <h2 id="quick-check" data-i18n="section_2_1">2.1 快速开始检查清单</h2>
+            <ul>
+                <li data-i18n="check_1">在 Windows 中安装并启用 WSL2</li>
+                <li data-i18n="check_2">下载并解压 Viscan 程序</li>
+                <li data-i18n="check_3">运行 viscan.bat 启动程序（默认使用一同分发的 Java 17 运行环境）</li>
+                <li data-i18n="check_4">在 Config 页面确认 WSL 可正常连接</li>
+                <li data-i18n="check_5">通过 Install 页面安装所需生物信息学软件，或在 Config 页面手动指定已安装软件的路径</li>
+                <li data-i18n="check_6">在 Status 页面确认所有工具状态为 Available</li>
+            </ul>
+
+            <h2 id="install-tools" data-i18n="section_2_2">2.2 安装外部生信工具</h2>
+            <p data-i18n="install_intro">Viscan 提供了便捷的安装界面，用于获取和管理所需的外部分析软件。</p>
+            <ol>
+                <li data-i18n="install_step_1">确保 WSL 环境已正确安装并处于运行状态。</li>
+                <li data-i18n="install_step_2">在主界面中进入 Settings → Install 页面。</li>
+                <li data-i18n="install_step_3">在该页面中配置环境存放路径，并选择各工具的安装版本。</li>
+                <li data-i18n="install_step_4">单击 Install 按钮。GUI 将新建一个终端页面以执行安装流程，请等待其运行完成。</li>
+                <li data-i18n="install_step_5">所有工具均通过 micromamba 进行环境创建与依赖管理，默认安装路径为 <code>external/tools_env/</code>。</li>
+            </ol>
+
+            <h2 id="config" data-i18n="section_2_3">2.3 配置 WSL 与工具路径</h2>
+            <ol>
+                <li data-i18n="config_step_1">在主界面进入 Settings → Config 页面。</li>
+                <li data-i18n="config_step_2">配置以下选项：</li>
+            </ol>
+
+            <h3 data-i18n="config_wsl_title">WSL 配置</h3>
+            <ul>
+                <li><strong data-i18n="config_wsl_exe">WSL 可执行文件</strong>：<span data-i18n="config_wsl_exe_desc">wsl.exe 的路径（默认值：wsl）</span></li>
+                <li><strong data-i18n="config_wsl_distro">WSL 发行版</strong>：<span data-i18n="config_wsl_distro_desc">所使用的 WSL 发行版名称（例如 Ubuntu、Arch，默认自动获取）</span></li>
+            </ul>
+
+            <h3 data-i18n="config_tools_title">工具路径</h3>
+            <ul>
+                <li><strong>fastp</strong>：<span data-i18n="config_fastp">fastp 二进制文件所在目录</span></li>
+                <li><strong>Bowtie2</strong>：<span data-i18n="config_bowtie2">Bowtie2 二进制文件所在目录</span></li>
+                <li><strong>Kraken2</strong>：<span data-i18n="config_kraken2">Kraken2 二进制文件所在目录</span></li>
+                <li><strong>Recentrifuge</strong>：<span data-i18n="config_recentrifuge">Recentrifuge 二进制文件所在目录</span></li>
+            </ul>
+
+            <h3 data-i18n="config_general_title">通用设置</h3>
+            <ul>
+                <li><strong data-i18n="config_workdir">工作目录</strong>：<span data-i18n="config_workdir_desc">默认的文件操作目录</span></li>
+                <li><strong data-i18n="config_threads">线程数</strong>：<span data-i18n="config_threads_desc">默认使用的 CPU 线程数（默认值为系统可用处理器数）</span></li>
+            </ul>
+
+            <h2 id="status" data-i18n="section_2_4">2.4 状态检查</h2>
+            <p data-i18n="status_intro">安装与配置完成后：</p>
+            <ol>
+                <li data-i18n="status_step_1">打开主界面 Settings → Status 页面</li>
+                <li data-i18n="status_step_2">检查所有工具状态是否显示为 "Available"（可用）</li>
+                <li data-i18n="status_step_3">验证 WSL 是否正常连接</li>
+                <li data-i18n="status_step_4">查看各工具的运行状况</li>
+            </ol>
+
+            <div class="warning-box">
+                <p><strong data-i18n="warning_tool_not_found_title">如果某个工具显示为 "Not Found"（未找到）：</strong></p>
+                <ul>
+                    <li data-i18n="warning_tool_not_found_1">检查 Config 页面中该工具的路径设置是否正确</li>
+                    <li data-i18n="warning_tool_not_found_2">如有必要，重新运行安装流程</li>
+                    <li data-i18n="warning_tool_not_found_3">确认 WSL 连接正常</li>
+                </ul>
+            </div>
+
+            <h1 id="quickstart" data-i18n="chapter_3">3 快速上手</h1>
+            <p data-i18n="quickstart_intro">本章节介绍 Viscan 的界面结构及标准分析流程，帮助用户快速完成一次宏基因组数据分析。</p>
+
+            <h2 id="interface" data-i18n="section_3_1">3.1 界面概览</h2>
+
+            <h3 id="menu" data-i18n="subsection_3_1_1">3.1.1 顶部菜单栏</h3>
+            <p data-i18n="menu_desc">顶部菜单栏包含以下功能模块：</p>
+            <ul>
+                <li><strong>Tools</strong>：<span data-i18n="menu_tools">单个生物信息学工具的参数配置界面</span></li>
+                <li><strong>Flow</strong>：<span data-i18n="menu_flow">预设分析流程的参数配置界面</span></li>
+                <li><strong>Settings</strong>：<span data-i18n="menu_settings">外部工具安装、WSL 配置及全局参数设置</span></li>
+            </ul>
+
+            <h3 id="file-manager" data-i18n="subsection_3_1_2">3.1.2 文件管理区域（左侧面板）</h3>
+            <p data-i18n="filemanager_desc">该区域用于样本文件的导入与管理。</p>
+
+            <h4 data-i18n="file_add_title">添加文件</h4>
+            <p data-i18n="file_add_desc">支持以下两种方式导入数据文件：</p>
+            <ul>
+                <li><strong data-i18n="file_add_browse">通过浏览添加</strong>
+                <p data-i18n="file_add_browse_desc">单击 "File" 或 "Folder" 按钮，在资源管理器中选择文件或文件夹。</p></li>
+                <li><strong data-i18n="file_add_drag">拖拽添加</strong>
+                <p data-i18n="file_add_drag_desc">将文件或文件夹直接拖入文件列表区域。</p></li>
+            </ul>
+
+            <h4 data-i18n="file_group_title">文件分组</h4>
+            <p data-i18n="file_group_desc">文件列表通过分组标题（Header）进行组织，用于归类相关样本。用户可通过拖拽方式调整文件所属分组。</p>
+
+            <h4 data-i18n="file_reorder_title">文件排序</h4>
+            <ul>
+                <li data-i18n="reorder_step_1">单击 "Reorder" 按钮以启用排序模式</li>
+                <li data-i18n="reorder_step_2">在列表中拖动文件以调整顺序</li>
+                <li data-i18n="reorder_step_3">关闭 "Reorder" 以锁定当前顺序</li>
+            </ul>
+
+            <h3 id="params-panel" data-i18n="subsection_3_1_3">3.1.3 参数与执行面板（右侧区域）</h3>
+            <p data-i18n="params_desc">该区域用于参数配置与命令执行。</p>
+
+            <h4 data-i18n="params_basic_title">基础参数</h4>
+            <ul>
+                <li data-i18n="param_input">输入文件路径</li>
+                <li data-i18n="param_output">输出文件路径</li>
+                <li data-i18n="param_required">必要参数设置</li>
+            </ul>
+
+            <h4 data-i18n="params_advanced_title">进阶参数</h4>
+            <ul>
+                <li data-i18n="param_advanced">各工具的扩展参数设置</li>
+            </ul>
+
+            <h4 data-i18n="params_cmd_title">命令生成与执行</h4>
+            <ul>
+                <li data-i18n="cmd_generate">单击 Generate 生成命令</li>
+                <li data-i18n="cmd_run">单击 Run 新建终端并执行命令</li>
+            </ul>
+
+            <h2 id="preparation" data-i18n="section_3_2">3.2 分析前准备</h2>
+            <p data-i18n="prep_intro">在正式运行分析流程前，需要准备 Kraken2 数据库及 NCBI 分类学信息。</p>
+
+            <h3 id="kraken2-db" data-i18n="subsection_3_2_1">3.2.1 Kraken2 数据库</h3>
+            <p data-i18n="kraken2_intro">Kraken2 数据库可通过以下两种方式获取：</p>
+
+            <h4 data-i18n="kraken2_build_title">1. 自行构建</h4>
+            <p data-i18n="kraken2_build_desc">使用以下命令构建数据库：</p>
+            <ul>
+                <li>k2 download-library</li>
+                <li>k2 download-taxonomy</li>
+                <li>k2 build</li>
+            </ul>
+            <p data-i18n="kraken2_build_steps">基本流程包括下载参考基因组、获取 taxonomy 信息并构建索引。</p>
+
+            <h4 data-i18n="kraken2_download_title">2. 下载预构建数据库</h4>
+            <p data-i18n="kraken2_download_desc">可以从 AWS 索引页面下载预构建数据库：</p>
+            <p><a href="https://benlangmead.github.io/aws-indexes/k2" target="_blank">https://benlangmead.github.io/aws-indexes/k2</a></p>
+            <p data-i18n="kraken2_download_note">适用于快速部署场景。</p>
+
+            <h3 id="db-suggestion" data-i18n="subsection_3_2_2">3.2.2 数据库构建建议</h3>
+            <p data-i18n="db_suggestion">建议采用分库策略：</p>
+            <ul>
+                <li data-i18n="db_host">构建宿主专用数据库，用于宿主去除</li>
+                <li data-i18n="db_pathogen">构建病原候选数据库，用于物种分类</li>
+            </ul>
+
+            <h3 id="taxdump" data-i18n="subsection_3_2_3">3.2.3 NCBI 分类学信息（taxdump）</h3>
+            <p data-i18n="taxdump_intro">taxonomy 数据可通过以下方式获取：</p>
+            <ul>
+                <li data-i18n="taxdump_official">官方下载：<code>ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz</code></li>
+                <li>k2 download-taxonomy</li>
+                <li>retaxdump（Recentrifuge 工具）</li>
+            </ul>
+            <p data-i18n="taxdump_note">应确保 taxonomy 数据版本与数据库构建版本一致。</p>
+
+            <h2 id="workflow" data-i18n="section_3_3">3.3 标准分析流程</h2>
+            <p data-i18n="workflow_intro">以下步骤描述一次完整分析过程。</p>
+
+            <h4 data-i18n="step1_title">步骤 1：导入数据</h4>
+            <p data-i18n="step1_desc">在左侧文件管理区域添加 FASTQ 文件以及存放参考数据库的文件夹。</p>
+
+            <h4 data-i18n="step2_title">步骤 2：选择分析模式</h4>
+            <p data-i18n="step2_desc">根据需求选择运行方式：</p>
+            <ul>
+                <li data-i18n="step2_tools">在 Tools 页面运行单个工具</li>
+                <li data-i18n="step2_flow">在 Flow 页面运行预设分析流程</li>
+            </ul>
+
+            <h4 data-i18n="step3_title">步骤 3：设置参数</h4>
+            <p data-i18n="step3_desc">在参数面板中：</p>
+            <ul>
+                <li data-i18n="step3_param_1">配置输入与输出路径（通过从左侧文件列表拖拽并释放于目标输入组件）</li>
+                <li data-i18n="step3_param_2">设置必要参数</li>
+                <li data-i18n="step3_param_3">根据需要调整进阶参数</li>
+            </ul>
+
+            <h4 data-i18n="step4_title">步骤 4：生成并执行命令</h4>
+            <ol>
+                <li data-i18n="step4_1">单击 Generate 生成命令</li>
+                <li data-i18n="step4_2">检查命令预览</li>
+                <li data-i18n="step4_3">单击 Run 启动终端并执行分析</li>
+            </ol>
+
+            <h2 id="results" data-i18n="section_3_4">3.4 结果查看与判读</h2>
+            <p data-i18n="results_intro">分析完成后，结果文件将输出至指定目录。</p>
+
+            <h3 id="visualization" data-i18n="subsection_3_4_1">3.4.1 可视化结果</h3>
+            <p data-i18n="vis_intro">Recentrifuge 输出 Krona-like 交互式 HTML 饼图，用于展示分类层级结构与相对丰度信息。该图表支持：</p>
+            <ul>
+                <li data-i18n="vis_multi">多样本对比</li>
+                <li data-i18n="vis_ctrl">阴性对照比较</li>
+                <li data-i18n="vis_derived">衍生样本分析</li>
+            </ul>
+
+            <h2 id="pathogen" data-i18n="section_3_5">3.5 病原判读建议</h2>
+            <p data-i18n="pathogen_intro">在进行潜在病原判读时，可依托 Recentrifuge 生成的交互式 HTML 饼图，通过以下三类信息进行分析：</p>
+            <ul>
+                <li><strong>CTRL</strong>：<span data-i18n="pathogen_ctrl">显示病例样本减去阴性对照后的分类结果，可用于识别在阴性样本中不存在的候选病原。</span></li>
+                <li><strong>EXCLUSIVE</strong>：<span data-i18n="pathogen_exclusive">显示每个样本独有的物种，有助于发现特异性候选病原。</span></li>
+                <li><strong>SHARED_CTRL</strong>：<span data-i18n="pathogen_shared">显示不同样本之间共享且经过对照处理的物种信息，用于判断可能的共性或污染。</span></li>
+            </ul>
+            <div class="info-box">
+                <p data-i18n="pathogen_advice">理想情况下，应重点关注病例样本中出现的 CTRL 和 EXCLUSIVE 物种，同时结合 SHARED_CTRL 信息确认物种是否在其他样本中共享，从而提高潜在病原判读的可靠性。</p>
+            </div>
+
+            <h1 id="troubleshoot" data-i18n="chapter_4">4 错误排查</h1>
+            <p data-i18n="troubleshoot_intro">在使用 Viscan 过程中，可能遇到安装、配置或运行问题。常见问题及排查方法如下：</p>
+
+            <h2 id="tool-not-found" data-i18n="section_4_1">4.1 工具未找到或不可用</h2>
+            <p><strong data-i18n="ts_4_1_symptom_title">症状：</strong><span data-i18n="ts_4_1_symptom">Status 页显示工具状态为 Not Found。</span></p>
+            <p><strong data-i18n="ts_4_1_solution_title">排查方法：</strong></p>
+            <ol>
+                <li data-i18n="ts_4_1_1">检查 Config 页中对应工具的路径是否正确。</li>
+                <li data-i18n="ts_4_1_2">确认该工具已安装并且可在 WSL 中运行。</li>
+                <li data-i18n="ts_4_1_3">如有必要，重新运行 Install 页安装流程。</li>
+            </ol>
+
+            <h2 id="wsl-fail" data-i18n="section_4_2">4.2 WSL 无法连接</h2>
+            <p><strong data-i18n="ts_4_2_symptom_title">症状：</strong><span data-i18n="ts_4_2_symptom">执行命令时提示无法访问 WSL 或命令失败。</span></p>
+            <p><strong data-i18n="ts_4_2_solution_title">排查方法：</strong></p>
+            <ol>
+                <li data-i18n="ts_4_2_1">确认 WSL 已启动，并能在命令行中正常执行 wsl 命令。</li>
+                <li data-i18n="ts_4_2_2">检查 Config 页中 WSL 可执行文件路径及发行版名称是否正确。</li>
+                <li data-i18n="ts_4_2_3">系统 RAM 不足时也可能导致 WSL 无法正常连接，可尝试清理系统内存后重启 WSL。</li>
+            </ol>
+
+            <h2 id="file-path" data-i18n="section_4_3">4.3 数据文件或路径问题</h2>
+            <p><strong data-i18n="ts_4_3_symptom_title">症状：</strong><span data-i18n="ts_4_3_symptom">导入文件失败或分析报错。</span></p>
+            <p><strong data-i18n="ts_4_3_solution_title">排查方法：</strong></p>
+            <ol>
+                <li data-i18n="ts_4_3_1">确认文件路径正确，避免特殊字符或空格导致路径解析失败。</li>
+                <li data-i18n="ts_4_3_2">使用支持的文件格式（如 FASTQ、FASTA 等）。</li>
+                <li data-i18n="ts_4_3_3">文件路径无法访问时，尤其是 /mnt 下的外接硬盘，可能未被 WSL 识别，重启 WSL 通常可以解决。</li>
+                <li data-i18n="ts_4_3_4">文件导航列表右键菜单检查 Windows 与 WSL 路径转换是否正确（Viscan 会自动转换，但手动路径可能出错）。</li>
+            </ol>
+
+            <h2 id="cmd-error" data-i18n="section_4_4">4.4 分析命令执行错误</h2>
+            <p><strong data-i18n="ts_4_4_symptom_title">症状：</strong><span data-i18n="ts_4_4_symptom">终端执行命令报错。</span></p>
+            <p><strong data-i18n="ts_4_4_solution_title">排查方法：</strong></p>
+            <ol>
+                <li data-i18n="ts_4_4_1">查看终端输出的错误信息，确认依赖工具和参数正确。</li>
+                <li data-i18n="ts_4_4_2">检查所选数据库、参考序列和配置参数是否完整。</li>
+                <li data-i18n="ts_4_4_3">尝试在 WSL 中手动运行相同命令，确认工具环境可用。</li>
+            </ol>
+
+            <h1 id="appendix" data-i18n="appendix">附录 A：WSL 配置与使用建议</h1>
+
+            <h2 data-i18n="appendix_perf_title">提升 WSL 性能</h2>
+            <p data-i18n="appendix_perf_desc">可以在 Windows 用户目录下创建 .wslconfig 文件，自定义 WSL2 的资源分配：</p>
+            <pre data-i18n="code_wslconfig"><code>[wsl2]
+memory=16GB            # 分配给 WSL 的最大内存
+processors=8           # 分配 CPU 核心数量
+swap=8GB               # 交换空间大小
+swapFile=D:\\wsl-swap.vhdx  # 交换文件路径</code></pre>
+            <p data-i18n="appendix_perf_note">根据实际计算机配置调整内存和核心数，避免影响 Windows 系统性能。</p>
+
+            <h2 data-i18n="appendix_fs_title">访问 Windows 文件系统</h2>
+            <ul>
+                <li><span data-i18n="appendix_fs_mount">Windows 磁盘在 WSL 中挂载路径为 /mnt/</span>
+                <p data-i18n="example_path_mount">例如：C:\Users\data → /mnt/c/Users/data</p></li>
+                <li><span data-i18n="appendix_fs_access">在 Windows 中访问 WSL 文件，可以使用网络路径：</span>
+                <p data-i18n="example_path_access"><code>\\wsl.localhost\<distro>\</code></p></li>
+            </ul>
+
+            <div class="footer">
+                <p><strong data-i18n="footer_title">Viscan 用户手册 — 版本 1.0</strong></p>
+                <p data-i18n="footer_updated">最后更新：2026-02-17</p>
+                <p><span data-i18n="footer_link">获取更新与支持，请访问：</span> <a href="https://github.com/HuXianghuan/Viscan" target="_blank">https://github.com/HuXianghuan/Viscan</a></p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const translations = {
+            zh: {
+                sidebar_title: "Viscan 手册",
+                chapter_1: "1 简介",
+                section_1_1: "1.1 什么是 Viscan？",
+                section_1_2: "1.2 运行环境说明",
+                section_1_3: "1.3 支持的工具一览",
+                chapter_2: "2 安装与配置",
+                section_2_1: "2.1 快速开始检查清单",
+                section_2_2: "2.2 安装外部生信工具",
+                section_2_3: "2.3 配置 WSL 与工具路径",
+                section_2_4: "2.4 状态检查",
+                chapter_3: "3 快速上手",
+                section_3_1: "3.1 界面概览",
+                section_3_2: "3.2 分析前准备",
+                section_3_3: "3.3 标准分析流程",
+                section_3_4: "3.4 结果查看与判读",
+                section_3_5: "3.5 病原判读建议",
+                chapter_4: "4 错误排查",
+                section_4_1: "4.1 工具未找到或不可用",
+                section_4_2: "4.2 WSL 无法连接",
+                section_4_3: "4.3 数据文件或路径问题",
+                section_4_4: "4.4 分析命令执行错误",
+                appendix: "附录 A：WSL 配置与使用建议",
+                viscan_desc: "Viscan 是一款基于 JavaFX 的桌面应用程序，旨在简化 Windows 系统下通过 WSL2（Windows Subsystem for Linux 2）执行生物信息学工具的流程。它提供图形化界面，使用户能够在无需直接操作命令行的情况下从宏基因测序样本中识别病原物种。",
+                supported_tools_intro: "Viscan 支持的主要工具包括：",
+                tool_fastp: "高速全功能 FASTQ 数据预处理（质量控制、过滤和报告生成）",
+                tool_bowtie2: "高速、内存高效的 DNA 读段比对工具，用于宿主去除或参考基因组比对",
+                tool_kraken2: "基于 k-mer 的宏基因组分类工具，可对读段进行快速物种鉴定",
+                tool_recentrifuge: "对 Kraken2 分类结果进行整理、统计和可视化，支持阴性对照比较",
+                env_desc: "Viscan 在以下环境中完成开发与测试：",
+                table_item: "项目",
+                table_env: "环境",
+                item_os: "操作系统",
+                env_note: "Viscan 理论上可在支持 WSL 的 Windows 系统上运行，但尚未在所有 Windows 版本或 WSL 版本上进行全面测试。",
+                table_tool: "工具",
+                table_function: "功能说明",
+                func_fastp: "FASTQ 数据质量控制与过滤，生成质控报告",
+                func_bowtie2: "读段与参考基因组的比对（常用于宿主去除）",
+                func_k2_classify: "使用 Kraken2 进行序列分类鉴定",
+                func_k2_download_lib: "下载物种基因组参考序列",
+                func_k2_download_tax: "下载 NCBI 分类学信息",
+                func_k2_build: "根据现有的参考基因组序列构建 Kraken2 数据库索引",
+                func_recentrifuge: "对分类结果进行置信度计算、多样品比较和可视化分析",
+                func_flow1: "顺序执行质控、宿主去除与病原分类的预设分析流程",
+                check_1: "在 Windows 中安装并启用 WSL2",
+                check_2: "下载并解压 Viscan 程序",
+                check_3: "运行 viscan.bat 启动程序（默认使用一同分发的 Java 17 运行环境）",
+                check_4: "在 Config 页面确认 WSL 可正常连接",
+                check_5: "通过 Install 页面安装所需生物信息学软件，或在 Config 页面手动指定已安装软件的路径",
+                check_6: "在 Status 页面确认所有工具状态为 Available",
+                install_intro: "Viscan 提供了便捷的安装界面，用于获取和管理所需的外部分析软件。",
+                install_step_1: "确保 WSL 环境已正确安装并处于运行状态。",
+                install_step_2: "在主界面中进入 Settings → Install 页面。",
+                install_step_3: "在该页面中配置环境存放路径，并选择各工具的安装版本。",
+                install_step_4: "单击 Install 按钮。GUI 将新建一个终端页面以执行安装流程，请等待其运行完成。",
+                install_step_5: "所有工具均通过 micromamba 进行环境创建与依赖管理，默认安装路径为 external/tools_env/。",
+                config_step_1: "在主界面进入 Settings → Config 页面。",
+                config_step_2: "配置以下选项：",
+                config_wsl_title: "WSL 配置",
+                config_wsl_exe: "WSL 可执行文件",
+                config_wsl_exe_desc: "wsl.exe 的路径（默认值：wsl）",
+                config_wsl_distro: "WSL 发行版",
+                config_wsl_distro_desc: "所使用的 WSL 发行版名称（例如 Ubuntu、Arch，默认自动获取）",
+                config_tools_title: "工具路径",
+                config_fastp: "fastp 二进制文件所在目录",
+                config_bowtie2: "Bowtie2 二进制文件所在目录",
+                config_kraken2: "Kraken2 二进制文件所在目录",
+                config_recentrifuge: "Recentrifuge 二进制文件所在目录",
+                config_general_title: "通用设置",
+                config_workdir: "工作目录",
+                config_workdir_desc: "默认的文件操作目录",
+                config_threads: "线程数",
+                config_threads_desc: "默认使用的 CPU 线程数（默认值为系统可用处理器数）",
+                status_intro: "安装与配置完成后：",
+                status_step_1: "打开主界面 Settings → Status 页面",
+                status_step_2: "检查所有工具状态是否显示为 \"Available\"（可用）",
+                status_step_3: "验证 WSL 是否正常连接",
+                status_step_4: "查看各工具的运行状况",
+                warning_tool_not_found_title: "如果某个工具显示为 \"Not Found\"（未找到）：",
+                warning_tool_not_found_1: "检查 Config 页面中该工具的路径设置是否正确",
+                warning_tool_not_found_2: "如有必要，重新运行安装流程",
+                warning_tool_not_found_3: "确认 WSL 连接正常",
+                quickstart_intro: "本章节介绍 Viscan 的界面结构及标准分析流程，帮助用户快速完成一次宏基因组数据分析。",
+                subsection_3_1_1: "3.1.1 顶部菜单栏",
+                subsection_3_1_2: "3.1.2 文件管理区域（左侧面板）",
+                subsection_3_1_3: "3.1.3 参数与执行面板（右侧区域）",
+                menu_desc: "顶部菜单栏包含以下功能模块：",
+                menu_tools: "单个生物信息学工具的参数配置界面",
+                menu_flow: "预设分析流程的参数配置界面",
+                menu_settings: "外部工具安装、WSL 配置及全局参数设置",
+                filemanager_desc: "该区域用于样本文件的导入与管理。",
+                file_add_title: "添加文件",
+                file_add_desc: "支持以下两种方式导入数据文件：",
+                file_add_browse: "通过浏览添加",
+                file_add_browse_desc: "单击 \"File\" 或 \"Folder\" 按钮，在资源管理器中选择文件或文件夹。",
+                file_add_drag: "拖拽添加",
+                file_add_drag_desc: "将文件或文件夹直接拖入文件列表区域。",
+                file_group_title: "文件分组",
+                file_group_desc: "文件列表通过分组标题（Header）进行组织，用于归类相关样本。用户可通过拖拽方式调整文件所属分组。",
+                file_reorder_title: "文件排序",
+                reorder_step_1: "单击 \"Reorder\" 按钮以启用排序模式",
+                reorder_step_2: "在列表中拖动文件以调整顺序",
+                reorder_step_3: "关闭 \"Reorder\" 以锁定当前顺序",
+                params_desc: "该区域用于参数配置与命令执行。",
+                params_basic_title: "基础参数",
+                param_input: "输入文件路径",
+                param_output: "输出文件路径",
+                param_required: "必要参数设置",
+                params_advanced_title: "进阶参数",
+                param_advanced: "各工具的扩展参数设置",
+                params_cmd_title: "命令生成与执行",
+                cmd_generate: "单击 Generate 生成命令",
+                cmd_run: "单击 Run 新建终端并执行命令",
+                prep_intro: "在正式运行分析流程前，需要准备 Kraken2 数据库及 NCBI 分类学信息。",
+                subsection_3_2_1: "3.2.1 Kraken2 数据库",
+                kraken2_intro: "Kraken2 数据库可通过以下两种方式获取：",
+                kraken2_build_title: "1. 自行构建",
+                kraken2_build_desc: "使用以下命令构建数据库：",
+                kraken2_build_steps: "基本流程包括下载参考基因组、获取 taxonomy 信息并构建索引。",
+                kraken2_download_title: "2. 下载预构建数据库",
+                kraken2_download_desc: "可以从 AWS 索引页面下载预构建数据库：",
+                kraken2_download_note: "适用于快速部署场景。",
+                subsection_3_2_2: "3.2.2 数据库构建建议",
+                db_suggestion: "建议采用分库策略：",
+                db_host: "构建宿主专用数据库，用于宿主去除",
+                db_pathogen: "构建病原候选数据库，用于物种分类",
+                subsection_3_2_3: "3.2.3 NCBI 分类学信息（taxdump）",
+                taxdump_intro: "taxonomy 数据可通过以下方式获取：",
+                taxdump_official: "官方下载：",
+                taxdump_note: "应确保 taxonomy 数据版本与数据库构建版本一致。",
+                workflow_intro: "以下步骤描述一次完整分析过程。",
+                step1_title: "步骤 1：导入数据",
+                step1_desc: "在左侧文件管理区域添加 FASTQ 文件以及存放参考数据库的文件夹。",
+                step2_title: "步骤 2：选择分析模式",
+                step2_desc: "根据需求选择运行方式：",
+                step2_tools: "在 Tools 页面运行单个工具",
+                step2_flow: "在 Flow 页面运行预设分析流程",
+                step3_title: "步骤 3：设置参数",
+                step3_desc: "在参数面板中：",
+                step3_param_1: "配置输入与输出路径（通过从左侧文件列表拖拽并释放于目标输入组件）",
+                step3_param_2: "设置必要参数",
+                step3_param_3: "根据需要调整进阶参数",
+                step4_title: "步骤 4：生成并执行命令",
+                step4_1: "单击 Generate 生成命令",
+                step4_2: "检查命令预览",
+                step4_3: "单击 Run 启动终端并执行分析",
+                subsection_3_4_1: "3.4.1 可视化结果",
+                results_intro: "分析完成后，结果文件将输出至指定目录。",
+                vis_intro: "Recentrifuge 输出 Krona-like 交互式 HTML 饼图，用于展示分类层级结构与相对丰度信息。该图表支持：",
+                vis_multi: "多样本对比",
+                vis_ctrl: "阴性对照比较",
+                vis_derived: "衍生样本分析",
+                pathogen_intro: "在进行潜在病原判读时，可依托 Recentrifuge 生成的交互式 HTML 饼图，通过以下三类信息进行分析：",
+                pathogen_ctrl: "显示病例样本减去阴性对照后的分类结果，可用于识别在阴性样本中不存在的候选病原。",
+                pathogen_exclusive: "显示每个样本独有的物种，有助于发现特异性候选病原。",
+                pathogen_shared: "显示不同样本之间共享且经过对照处理的物种信息，用于判断可能的共性或污染。",
+                pathogen_advice: "理想情况下，应重点关注病例样本中出现的 CTRL 和 EXCLUSIVE 物种，同时结合 SHARED_CTRL 信息确认物种是否在其他样本中共享，从而提高潜在病原判读的可靠性。",
+                troubleshoot_intro: "在使用 Viscan 过程中，可能遇到安装、配置或运行问题。常见问题及排查方法如下：",
+                ts_4_1_symptom_title: "症状：",
+                ts_4_1_symptom: "Status 页显示工具状态为 Not Found。",
+                ts_4_1_solution_title: "排查方法：",
+                ts_4_1_1: "检查 Config 页中对应工具的路径是否正确。",
+                ts_4_1_2: "确认该工具已安装并且可在 WSL 中运行。",
+                ts_4_1_3: "如有必要，重新运行 Install 页安装流程。",
+                ts_4_2_symptom_title: "症状：",
+                ts_4_2_symptom: "执行命令时提示无法访问 WSL 或命令失败。",
+                ts_4_2_solution_title: "排查方法：",
+                ts_4_2_1: "确认 WSL 已启动，并能在命令行中正常执行 wsl 命令。",
+                ts_4_2_2: "检查 Config 页中 WSL 可执行文件路径及发行版名称是否正确。",
+                ts_4_2_3: "系统 RAM 不足时也可能导致 WSL 无法正常连接，可尝试清理系统内存后重启 WSL。",
+                ts_4_3_symptom_title: "症状：",
+                ts_4_3_symptom: "导入文件失败或分析报错。",
+                ts_4_3_solution_title: "排查方法：",
+                ts_4_3_1: "确认文件路径正确，避免特殊字符或空格导致路径解析失败。",
+                ts_4_3_2: "使用支持的文件格式（如 FASTQ、FASTA 等）。",
+                ts_4_3_3: "文件路径无法访问时，尤其是 /mnt 下的外接硬盘，可能未被 WSL 识别，重启 WSL 通常可以解决。",
+                ts_4_3_4: "文件导航列表右键菜单检查 Windows 与 WSL 路径转换是否正确（Viscan 会自动转换，但手动路径可能出错）。",
+                ts_4_4_symptom_title: "症状：",
+                ts_4_4_symptom: "终端执行命令报错。",
+                ts_4_4_solution_title: "排查方法：",
+                ts_4_4_1: "查看终端输出的错误信息，确认依赖工具和参数正确。",
+                ts_4_4_2: "检查所选数据库、参考序列和配置参数是否完整。",
+                ts_4_4_3: "尝试在 WSL 中手动运行相同命令，确认工具环境可用。",
+                appendix_perf_title: "提升 WSL 性能",
+                appendix_perf_desc: "可以在 Windows 用户目录下创建 .wslconfig 文件，自定义 WSL2 的资源分配：",
+                code_wslconfig: "[wsl2]\nmemory=16GB            # Maximum memory allocated to WSL\nprocessors=8           # Number of CPU cores allocated\nswap=8GB               # Swap space size\nswapFile=D:\\\\wsl-swap.vhdx  # Swap file path",
+                appendix_perf_note: "根据实际计算机配置调整内存和核心数，避免影响 Windows 系统性能。",
+                appendix_fs_title: "访问 Windows 文件系统",
+                appendix_fs_mount: "Windows 磁盘在 WSL 中挂载路径为 /mnt/",
+                example_path_mount: "例如：C:\\\\Users\\\\data → /mnt/c/Users/data",
+                appendix_fs_access: "在 Windows 中访问 WSL 文件，可以使用网络路径：",
+                example_path_access: "\\\\\\\\wsl.localhost\\\\&lt;distro&gt;\\\\",
+                footer_title: "Viscan 用户手册 — 版本 1.0",
+                footer_updated: "最后更新：2026-02-17",
+                footer_link: "获取更新与支持，请访问："
+            },
+            en: {
+                sidebar_title: "Viscan Manual",
+                chapter_1: "1 Introduction",
+                section_1_1: "1.1 What is Viscan?",
+                section_1_2: "1.2 Environment Requirements",
+                section_1_3: "1.3 Supported Tools Overview",
+                chapter_2: "2 Installation and Configuration",
+                section_2_1: "2.1 Quick Start Checklist",
+                section_2_2: "2.2 Installing External Bioinformatics Tools",
+                section_2_3: "2.3 Configuring WSL and Tool Paths",
+                section_2_4: "2.4 Status Check",
+                chapter_3: "3 Quick Start",
+                section_3_1: "3.1 Interface Overview",
+                section_3_2: "3.2 Pre-analysis Preparation",
+                section_3_3: "3.3 Standard Analysis Workflow",
+                section_3_4: "3.4 Results Review and Interpretation",
+                section_3_5: "3.5 Pathogen Interpretation Guidelines",
+                chapter_4: "4 Troubleshooting",
+                section_4_1: "4.1 Tools Not Found or Unavailable",
+                section_4_2: "4.2 WSL Connection Failed",
+                section_4_3: "4.3 Data File or Path Issues",
+                section_4_4: "4.4 Command Execution Errors",
+                appendix: "Appendix A: WSL Configuration and Usage Tips",
+                viscan_desc: "Viscan is a JavaFX-based desktop application designed to simplify the process of running bioinformatics tools through WSL2 (Windows Subsystem for Linux 2) on Windows systems. It provides a graphical interface, enabling users to identify pathogenic species from metagenomic sequencing samples without directly using the command line.",
+                supported_tools_intro: "Viscan supports the following major tools:",
+                tool_fastp: "High-speed, all-in-one FASTQ data preprocessing (quality control, filtering, and report generation)",
+                tool_bowtie2: "Ultrafast and memory-efficient DNA read alignment tool, used for host removal or reference genome alignment",
+                tool_kraken2: "k-mer based metagenomic classification tool for rapid species identification of reads",
+                tool_recentrifuge: "Organizes, summarizes, and visualizes Kraken2 classification results, supporting negative control comparison",
+                env_desc: "Viscan was developed and tested in the following environment:",
+                table_item: "Item",
+                table_env: "Environment",
+                item_os: "Operating System",
+                env_note: "Viscan should theoretically run on Windows systems that support WSL, but has not been comprehensively tested on all Windows versions or WSL versions.",
+                table_tool: "Tool",
+                table_function: "Description",
+                func_fastp: "FASTQ data quality control and filtering, generates QC reports",
+                func_bowtie2: "Read alignment with reference genomes (commonly used for host removal)",
+                func_k2_classify: "Sequence classification using Kraken2",
+                func_k2_download_lib: "Download species genome reference sequences",
+                func_k2_download_tax: "Download NCBI taxonomy information",
+                func_k2_build: "Build Kraken2 database index from existing reference genome sequences",
+                func_recentrifuge: "Confidence calculation, multi-sample comparison, and visualization analysis of classification results",
+                func_flow1: "Preset analysis workflow for sequential execution of QC, host removal, and pathogen classification",
+                check_1: "Install and enable WSL2 in Windows",
+                check_2: "Download and extract Viscan program",
+                check_3: "Run viscan.bat to launch the program (uses the bundled Java 17 runtime by default)",
+                check_4: "Confirm WSL connection is working on the Config page",
+                check_5: "Install required bioinformatics software via the Install page, or manually specify installed tool paths on the Config page",
+                check_6: "Verify all tool status shows \"Available\" on the Status page",
+                install_intro: "Viscan provides a convenient installation interface for acquiring and managing required external analysis software.",
+                install_step_1: "Ensure WSL environment is correctly installed and running.",
+                install_step_2: "Navigate to Settings → Install page in the main interface.",
+                install_step_3: "Configure the environment storage path on that page and select installation versions for each tool.",
+                install_step_4: "Click the Install button. The GUI will create a new terminal page to execute the installation process. Please wait for completion.",
+                install_step_5: "All tools use micromamba for environment creation and dependency management, with default installation path of external/tools_env/.",
+                config_step_1: "Navigate to Settings → Config page in the main interface.",
+                config_step_2: "Configure the following options:",
+                config_wsl_title: "WSL Configuration",
+                config_wsl_exe: "WSL Executable",
+                config_wsl_exe_desc: "Path to wsl.exe (default: wsl)",
+                config_wsl_distro: "WSL Distribution",
+                config_wsl_distro_desc: "Name of the WSL distribution being used (e.g., Ubuntu, Arch, auto-detected by default)",
+                config_tools_title: "Tool Paths",
+                config_fastp: "Directory containing fastp binary",
+                config_bowtie2: "Directory containing Bowtie2 binary",
+                config_kraken2: "Directory containing Kraken2 binary",
+                config_recentrifuge: "Directory containing Recentrifuge binary",
+                config_general_title: "General Settings",
+                config_workdir: "Working Directory",
+                config_workdir_desc: "Default file operation directory",
+                config_threads: "Thread Count",
+                config_threads_desc: "Default number of CPU threads to use (default is number of available processors)",
+                status_intro: "After installation and configuration are complete:",
+                status_step_1: "Open Settings → Status page in the main interface",
+                status_step_2: "Check if all tools show \"Available\" status",
+                status_step_3: "Verify WSL connection is working properly",
+                status_step_4: "View the operational status of each tool",
+                warning_tool_not_found_title: "If a tool shows \"Not Found\":",
+                warning_tool_not_found_1: "Check if the tool's path setting on the Config page is correct",
+                warning_tool_not_found_2: "If necessary, re-run the installation process",
+                warning_tool_not_found_3: "Confirm WSL connection is working",
+                quickstart_intro: "This chapter introduces Viscan's interface structure and standard analysis workflow, helping users quickly complete a metagenomic data analysis.",
+                subsection_3_1_1: "3.1.1 Top Menu Bar",
+                subsection_3_1_2: "3.1.2 File Management Area (Left Panel)",
+                subsection_3_1_3: "3.1.3 Parameter and Execution Panel (Right Area)",
+                menu_desc: "The top menu bar contains the following functional modules:",
+                menu_tools: "Parameter configuration interface for individual bioinformatics tools",
+                menu_flow: "Parameter configuration interface for preset analysis workflows",
+                menu_settings: "External tool installation, WSL configuration, and global parameter settings",
+                filemanager_desc: "This area is used for importing and managing sample files.",
+                file_add_title: "Adding Files",
+                file_add_desc: "Data files can be imported in the following two ways:",
+                file_add_browse: "Add via Browse",
+                file_add_browse_desc: "Click \"File\" or \"Folder\" button to select files or folders in File Explorer.",
+                file_add_drag: "Add via Drag and Drop",
+                file_add_drag_desc: "Drag files or folders directly into the file list area.",
+                file_group_title: "File Grouping",
+                file_group_desc: "File lists are organized by group headers (Header), used to categorize related samples. Users can adjust which group a file belongs to by dragging.",
+                file_reorder_title: "File Reordering",
+                reorder_step_1: "Click \"Reorder\" button to enable reordering mode",
+                reorder_step_2: "Drag files in the list to adjust order",
+                reorder_step_3: "Close \"Reorder\" to lock current order",
+                params_desc: "This area is used for parameter configuration and command execution.",
+                params_basic_title: "Basic Parameters",
+                param_input: "Input file path",
+                param_output: "Output file path",
+                param_required: "Required parameter settings",
+                params_advanced_title: "Advanced Parameters",
+                param_advanced: "Extended parameter settings for each tool",
+                params_cmd_title: "Command Generation and Execution",
+                cmd_generate: "Click Generate to generate command",
+                cmd_run: "Click Run to create terminal and execute command",
+                prep_intro: "Before running the analysis workflow, you need to prepare the Kraken2 database and NCBI taxonomy information.",
+                subsection_3_2_1: "3.2.1 Kraken2 Database",
+                kraken2_intro: "The Kraken2 database can be obtained in the following two ways:",
+                kraken2_build_title: "1. Build Yourself",
+                kraken2_build_desc: "Use the following commands to build the database:",
+                kraken2_build_steps: "The basic process includes downloading reference genomes, obtaining taxonomy information, and building the index.",
+                kraken2_download_title: "2. Download Pre-built Database",
+                kraken2_download_desc: "You can download pre-built databases from the AWS index page:",
+                kraken2_download_note: "Suitable for rapid deployment scenarios.",
+                subsection_3_2_2: "3.2.2 Database Construction Recommendations",
+                db_suggestion: "A database partitioning strategy is recommended:",
+                db_host: "Build a host-specific database for host removal",
+                db_pathogen: "Build a pathogen candidate database for species classification",
+                subsection_3_2_3: "3.2.3 NCBI Taxonomy Information (taxdump)",
+                taxdump_intro: "Taxonomy data can be obtained through the following methods:",
+                taxdump_official: "Official download:",
+                taxdump_note: "Ensure the taxonomy data version is consistent with the database build version.",
+                workflow_intro: "The following steps describe a complete analysis process.",
+                step1_title: "Step 1: Import Data",
+                step1_desc: "Add FASTQ files and the folder containing reference databases in the left file management area.",
+                step2_title: "Step 2: Select Analysis Mode",
+                step2_desc: "Choose the execution method based on requirements:",
+                step2_tools: "Run individual tools on the Tools page",
+                step2_flow: "Run preset analysis workflow on the Flow page",
+                step3_title: "Step 3: Set Parameters",
+                step3_desc: "In the parameter panel:",
+                step3_param_1: "Configure input and output paths (by dragging from the left file list and dropping onto target input components)",
+                step3_param_2: "Set required parameters",
+                step3_param_3: "Adjust advanced parameters as needed",
+                step4_title: "Step 4: Generate and Execute Command",
+                step4_1: "Click Generate to generate the command",
+                step4_2: "Check the command preview",
+                step4_3: "Click Run to launch the terminal and execute the analysis",
+                subsection_3_4_1: "3.4.1 Visualization Results",
+                results_intro: "After analysis is complete, result files will be output to the specified directory.",
+                vis_intro: "Recentrifuge outputs Krona-like interactive HTML pie charts to display classification hierarchy and relative abundance information. The charts support:",
+                vis_multi: "Multi-sample comparison",
+                vis_ctrl: "Negative control comparison",
+                vis_derived: "Derived sample analysis",
+                pathogen_intro: "When interpreting potential pathogens, you can rely on the interactive HTML pie charts generated by Recentrifuge and analyze using the following three types of information:",
+                pathogen_ctrl: "Shows classification results of case samples minus negative controls, useful for identifying candidate pathogens not present in negative samples.",
+                pathogen_exclusive: "Shows species unique to each sample, helpful for discovering specific candidate pathogens.",
+                pathogen_shared: "Shows species information shared between different samples and processed with controls, used to determine possible commonalities or contamination.",
+                pathogen_advice: "Ideally, focus on CTRL and EXCLUSIVE species appearing in case samples, while confirming with SHARED_CTRL information whether species are shared across other samples, thereby improving the reliability of potential pathogen interpretation.",
+                troubleshoot_intro: "While using Viscan, you may encounter installation, configuration, or runtime issues. Common problems and troubleshooting methods are as follows:",
+                ts_4_1_symptom_title: "Symptom:",
+                ts_4_1_symptom: "Status page shows tool status as Not Found.",
+                ts_4_1_solution_title: "Troubleshooting:",
+                ts_4_1_1: "Check if the corresponding tool's path on the Config page is correct.",
+                ts_4_1_2: "Confirm the tool is installed and can run in WSL.",
+                ts_4_1_3: "If necessary, re-run the Install page installation process.",
+                ts_4_2_symptom_title: "Symptom:",
+                ts_4_2_symptom: "Unable to access WSL or command failure when executing commands.",
+                ts_4_2_solution_title: "Troubleshooting:",
+                ts_4_2_1: "Confirm WSL is started and can execute wsl commands normally in the command line.",
+                ts_4_2_2: "Check if the WSL executable path and distribution name on the Config page are correct.",
+                ts_4_2_3: "Insufficient system RAM may also cause WSL connection failure; try clearing system memory and restarting WSL.",
+                ts_4_3_symptom_title: "Symptom:",
+                ts_4_3_symptom: "File import fails or analysis errors occur.",
+                ts_4_3_solution_title: "Troubleshooting:",
+                ts_4_3_1: "Confirm the file path is correct, avoiding special characters or spaces that cause path parsing failures.",
+                ts_4_3_2: "Use supported file formats (e.g., FASTQ, FASTA, etc.).",
+                ts_4_3_3: "When file paths are inaccessible, especially external drives under /mnt, they may not be recognized by WSL; restarting WSL usually resolves this.",
+                ts_4_3_4: "Check if Windows and WSL path conversion is correct in the file navigation list's context menu (Viscan converts automatically, but manual paths may be incorrect).",
+                ts_4_4_symptom_title: "Symptom:",
+                ts_4_4_symptom: "Terminal command execution error.",
+                ts_4_4_solution_title: "Troubleshooting:",
+                ts_4_4_1: "Check the terminal error output to confirm dependent tools and parameters are correct.",
+                ts_4_4_2: "Check if the selected database, reference sequences, and configuration parameters are complete.",
+                ts_4_4_3: "Try running the same command manually in WSL to confirm the tool environment is available.",
+                appendix_perf_title: "Improve WSL Performance",
+                appendix_perf_desc: "You can create a .wslconfig file in your Windows user directory to customize WSL2 resource allocation:",
+                code_wslconfig: "[wsl2]\nmemory=16GB            # Maximum memory allocated to WSL\nprocessors=8           # Number of CPU cores allocated\nswap=8GB               # Swap space size\nswapFile=D:\\\\wsl-swap.vhdx  # Swap file path",
+                appendix_perf_note: "Adjust memory and core count according to your actual computer configuration to avoid affecting Windows system performance.",
+                appendix_fs_title: "Access Windows File System",
+                appendix_fs_mount: "Windows disks are mounted at /mnt/ in WSL",
+                example_path_mount: "For example: C:\\\\Users\\\\data → /mnt/c/Users/data",
+                appendix_fs_access: "To access WSL files from Windows, use network path:",
+                example_path_access: "\\\\\\\\wsl.localhost\\\\&lt;distro&gt;\\\\",
+                footer_title: "Viscan User Manual — Version 1.0",
+                footer_updated: "Last Updated: 2026-02-17",
+                footer_link: "For updates and support, please visit:"
+            }
+        };
+
+        let currentLang = 'zh';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            const elements = document.querySelectorAll('[data-i18n]');
+
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    // Use innerHTML for code blocks to preserve formatting
+                    if (key === 'code_wslconfig') {
+                        element.innerHTML = `<code>${translations[lang][key]}</code>`;
+                    } else if (key === 'example_path_access') {
+                        const p = element.querySelector('p');
+                        if (p) {
+                            p.innerHTML = `<code>${translations[lang][key]}</code>`;
+                        }
+                    } else if (key === 'example_path_mount') {
+                        element.innerHTML = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            // Update button states
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.lang-btn[onclick="switchLanguage('${lang}')"]`).classList.add('active');
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+
+            // Update page title
+            document.title = lang === 'zh' ? 'Viscan 用户手册' : 'Viscan User Manual';
+
+            // Save preference to localStorage
+            localStorage.setItem('viscan-manual-lang', lang);
+        }
+
+        // Restore language preference on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('viscan-manual-lang');
+            if (savedLang && (savedLang === 'zh' || savedLang === 'en')) {
+                switchLanguage(savedLang);
+            }
+        });
+    </script>
+</body>
+</html>

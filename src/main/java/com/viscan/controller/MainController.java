@@ -4,6 +4,7 @@ package com.viscan.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.viscan.*;
 import com.viscan.Utils.HeaderUtils;
+import com.viscan.alert.AppAlert;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -17,6 +18,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -164,6 +166,26 @@ public class MainController {
 
     public ObservableList<FileItem> getFileItems() {
         return fileItems;
+    }
+
+
+    @FXML
+    private void openManual() {
+        try {
+            Path workDir = EnviromentManager.getWinWorkDir();
+            Path manualPath = workDir.resolve("docs").resolve("viscan_manual.html");
+            File manualFile = manualPath.toFile();
+
+            if (!manualFile.exists()) {
+                AppAlert.error("Manual not found", "viscan_manual.html not found in docs directory.");
+                return;
+            }
+
+            Desktop desktop = Desktop.getDesktop();
+            desktop.open(manualFile);
+        } catch (Exception e) {
+            AppAlert.error("Failed to open manual", e.getMessage());
+        }
     }
 
 

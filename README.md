@@ -29,18 +29,7 @@ A JavaFX desktop application for running bioinformatics tools on Windows with WS
 ./mvnw clean compile
 ```
 
-### 2. Install External Tools
-
-External tools are installed via micromamba to the `external/tools_env/` directory:
-
-```bash
-cd external
-bash install.sh
-```
-
-Default tools installed: fastp, kraken2, bowtie2, recentrifuge
-
-### 3. Run the Application
+### 2. Run the Application
 
 ```bash
 ./mvnw javafx:run
@@ -52,40 +41,38 @@ Or using Spring Boot plugin:
 ./mvnw spring-boot:run
 ```
 
+### 3. Install External Tools
+
+Navigate to the **Install** tab and configure the installation parameters:
+
+- **Install script location** - Path to the installation script (pre-filled)
+- **Environment location** - Where tools will be installed (default: `external/tools_env/`)
+- **Python version** - Python version to use (default: `3.12`)
+- **Packages** - Packages to install with optional versions (default: `fastp=1.0.1,bowtie2=2.5.4,kraken2=2.17.1,recentrifuge=2.0.0`)
+- **Channels** - Conda channels (default: `conda-forge,bioconda`)
+- **Rewrite Python shebangs** - Whether to update Python script shebangs (default: yes)
+
+Click the **Install** button to start the installation. The process runs in a new terminal tab.
+
+To uninstall the tools, click the **Uninstall** button. This will remove the entire `external/tools_env/` directory.
+
 ## External Tools Installation
 
-### Using the Install Script
+### Command Line Installation (Optional)
 
-The `external/install.sh` script supports custom installation parameters:
+The installation script can also be run directly from the command line:
 
 ```bash
-./install.sh [ENV_DIR] [PYTHON_VERSION] [PACKAGES] [CHANNELS] [UPDATE_SHEBANG]
+cd external
+bash install.sh [ENV_DIR] [PYTHON_VERSION] [PACKAGES] [CHANNELS] [UPDATE_SHEBANG]
 ```
 
 **Parameters**:
 - `ENV_DIR` - Environment installation directory (default: `./tools_env`)
 - `PYTHON_VERSION` - Python version (default: `3.11`)
-- `PACKAGES` - Packages to install, comma-separated (default: `fastp,bowtie2,kraken2,recentrifuge`)
+- `PACKAGES` - Packages to install, comma-separated. You can specify versions like `fastp=1.0.1,bowtie2=2.5.4`
 - `CHANNELS` - Conda channels (default: `conda-forge,bioconda`)
 - `UPDATE_SHEBANG` - Whether to update Python script shebang (default: `yes`)
-
-**Examples**:
-```bash
-# Install with default parameters
-./install.sh
-
-# Install specific packages
-./install.sh ./tools_env 3.11 fastp,bowtie2 conda-forge,bioconda yes
-```
-
-### Installed Tool Versions
-
-| Tool | Version | Description |
-|------|---------|-------------|
-| fastp | 1.0.1 | FASTQ preprocessing |
-| bowtie2 | 2.5.4 | Sequence alignment |
-| kraken2 | 2.17.1 | Taxonomic classification |
-| recentrifuge | - | Classification visualization |
 
 ## Configuration
 

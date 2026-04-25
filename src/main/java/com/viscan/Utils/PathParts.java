@@ -1,27 +1,32 @@
 package com.viscan.Utils;
 
-import java.nio.file.Path;
+import com.viscan.path.LinuxPath;
+import com.viscan.path.WindowsPath;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class PathParts {
 
-    private Path parent;
-    private List<String> nameParts;
-    private String suffix;
+    private final LinuxPath parent;
+    private final List<String> nameParts;
+    private final String suffix;
 
-
-    public PathParts(Path parent, List<String> nameParts, String suffix) {
+    public PathParts(LinuxPath parent, List<String> nameParts, String suffix) {
         this.parent = parent;
         this.nameParts = nameParts;
         this.suffix = suffix;
     }
 
-    public static PathParts parse(String str) {
-        Path path = Path.of(str);
+    public static PathParts fromWindowsPath(WindowsPath winPath) {
+        LinuxPath linuxPath = winPath.toMnt();
+        return fromLinuxPath(linuxPath);
+    }
 
-        String fileName = path.getFileName().toString();
+    public static PathParts fromLinuxPath(LinuxPath linuxPath) {
+        String value = linuxPath.value();
+        String fileName = linuxPath.fileName();
         int lastDot = fileName.lastIndexOf('.');
 
         if (lastDot <= 0 || lastDot == fileName.length() - 1) {
@@ -35,21 +40,24 @@ public class PathParts {
                 Arrays.asList(base.split("\\."))
         );
 
-        return new PathParts(path.getParent(), parts, suffix);
+        LinuxPath parentPath = new LinuxPath(linuxPath.parent());
+        return new PathParts(parentPath, parts, suffix);
     }
 
-    public Path getParent() {
+    public static PathParts parse(String str) {
+        if (WslPathConverter.isWindowsPath(str)) {
+            return fromWindowsPath(new WindowsPath(str));
+        }
+        return fromLinuxPath(new LinuxPath(str));
+    }
+
+    public LinuxPath getParent() {
         return parent;
     }
 
-    public String getLinuxParent() {
-        return WslPathConverter.toLinuxString(parent);
-    }
     public String getLinuxPath() {
-        return WslPathConverter.toLinuxString(parent.resolve(getFileName()));
+        return parent.resolve(getFileName()).toString();
     }
-
-
 
     public List<String> getNameParts() {
         return nameParts;
@@ -69,18 +77,9 @@ public class PathParts {
         return String.join(".", nameParts) + "." + suffix;
     }
 
-    public void setParent(Path parent) {
-        this.parent = parent;
+    public PathParts withParent(LinuxPath newParent) {
+        return new PathParts(newParent, new ArrayList<>(nameParts), suffix);
     }
-
-    public void setNameParts(List<String> nameParts) {
-        this.nameParts = nameParts;
-    }
-
-    public void setSuffix(String suffix) {
-        this.suffix = suffix;
-    }
-
 
     public PathParts copy() {
         return new PathParts(parent, new ArrayList<>(nameParts), suffix);
@@ -92,6 +91,4 @@ public class PathParts {
         return newParts;
     }
 
-
 }
-

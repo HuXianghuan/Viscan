@@ -4,6 +4,7 @@ import com.viscan.ConfigManager;
 import com.viscan.DragAcceptorsManual;
 import com.viscan.Utils.PathParts;
 import com.viscan.Utils.PathUtils;
+import com.viscan.path.LinuxPath;
 import com.viscan.alert.AppAlert;
 import com.viscan.tools.BaseTool;
 import com.viscan.tools.option.IntOption;
@@ -13,7 +14,6 @@ import com.viscan.validate.ValidationResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.nio.file.Path;
 import java.util.List;
 
 public class Bowtie2Controller extends BaseTabController {
@@ -88,7 +88,7 @@ public class Bowtie2Controller extends BaseTabController {
         BaseTool bowtie2Tool = new BaseTool();
 
         String outputDir = outputDirTextField.getText();
-        Path outputDirPath = Path.of(outputDir);
+        LinuxPath outputDirPath = new LinuxPath(outputDir);
 
         List<String> items = inputListView.getItems();
 
@@ -121,7 +121,9 @@ public class Bowtie2Controller extends BaseTabController {
             List<String> commonParts = PathUtils.longestCommonSubsequence(inputParts1.getTagParts(), inputParts2.getTagParts());
             commonParts.add(0, commonBase);
 
-            bowtie2Tool.addOption(new ValueOption("-1", input1)).addOption(new ValueOption("-2", input2));
+            String input1Linux = inputParts1.getLinuxPath();
+            String input2Linux = inputParts2.getLinuxPath();
+            bowtie2Tool.addOption(new ValueOption("-1", input1Linux)).addOption(new ValueOption("-2", input2Linux));
 
 
 
@@ -150,7 +152,8 @@ public class Bowtie2Controller extends BaseTabController {
 
             List<String> newParts = inputParts1.getNameParts();
 
-            bowtie2Tool.addOption(new ValueOption("-U", input1));
+            String input1Linux = inputParts1.getLinuxPath();
+            bowtie2Tool.addOption(new ValueOption("-U", input1Linux));
             if (demandSamCheck.isSelected()) {
                 PathParts samParts = new PathParts(outputDirPath, newParts, "sam");
                 bowtie2Tool.addOption(new ValueOption("-S", samParts.getLinuxPath()));

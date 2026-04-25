@@ -5,6 +5,7 @@ import com.viscan.ConfigManager;
 import com.viscan.DragAcceptorsManual;
 import com.viscan.Utils.PathParts;
 import com.viscan.Utils.PathUtils;
+import com.viscan.path.LinuxPath;
 import com.viscan.alert.AppAlert;
 import com.viscan.tools.BaseTool;
 import com.viscan.tools.option.FlagOption;
@@ -16,7 +17,6 @@ import com.viscan.validate.ValidationResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,7 +99,7 @@ public class K2ClassifyController extends BaseTabController {
         BaseTool k2ClassifyTool = new BaseTool();
 
         String outputDir = outputDirTextField.getText();
-        Path outputDirPath = Path.of(outputDir);
+        LinuxPath outputDirPath = new LinuxPath(outputDir);
 
         List<String> items = inputListView.getItems();
         String classifiedTag = ConfigManager.getConfig().getKraken2ClassifiedTag();
@@ -133,7 +133,7 @@ public class K2ClassifyController extends BaseTabController {
             List<String> commonParts = PathUtils.longestCommonSubsequence(inputParts1.getTagParts(), inputParts2.getTagParts());
             commonParts.add(0, commonBase);
 
-            k2ClassifyTool.addOption(new PositionOption(1, input1)).addOption(new PositionOption(2, input2));
+            k2ClassifyTool.addOption(new PositionOption(1, inputParts1.getLinuxPath())).addOption(new PositionOption(2, inputParts2.getLinuxPath()));
 
             if (demandClassificationCheck.isSelected()) {
 
@@ -171,7 +171,7 @@ public class K2ClassifyController extends BaseTabController {
         } else { //single
             String input1 = items.get(0);
             PathParts inputParts1 = PathParts.parse(input1);
-            k2ClassifyTool.addOption(new PositionOption(1, input1));
+            k2ClassifyTool.addOption(new PositionOption(1, inputParts1.getLinuxPath()));
 
             List<String> parts = new ArrayList<>(inputParts1.getNameParts());
 

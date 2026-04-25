@@ -4,6 +4,7 @@ import com.viscan.ConfigManager;
 import com.viscan.DragAcceptorsManual;
 import com.viscan.Utils.PathParts;
 import com.viscan.Utils.PathUtils;
+import com.viscan.path.LinuxPath;
 import com.viscan.alert.AppAlert;
 import com.viscan.tools.BaseTool;
 import com.viscan.tools.option.IntOption;
@@ -13,7 +14,6 @@ import com.viscan.validate.ValidationResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,7 +85,7 @@ public class FastpController extends BaseTabController {
 
 
         String outputDir = outputTextField.getText();
-        Path outputDirPath = Path.of(outputDir);
+        LinuxPath outputDirPath = new LinuxPath(outputDir);
 
         List<String> items = inputListView.getItems();
 
@@ -98,8 +98,8 @@ public class FastpController extends BaseTabController {
             PathParts inputParts1 = PathParts.parse(input1);
             PathParts inputParts2 = PathParts.parse(input2);
 
-            fastpTool.addOption(new ValueOption("--in1", input1));
-            fastpTool.addOption(new ValueOption("--in2", input2));
+            fastpTool.addOption(new ValueOption("--in1", inputParts1.getLinuxPath()));
+            fastpTool.addOption(new ValueOption("--in2", inputParts2.getLinuxPath()));
 
             PathParts outputParts1;
             PathParts outputParts2;
@@ -117,13 +117,9 @@ public class FastpController extends BaseTabController {
 
             } else {
 
-                outputParts1 = inputParts1.copy();
+                outputParts1 = inputParts1.copy().withParent(outputDirPath);
 
-                outputParts1.setParent(outputDirPath);
-
-                outputParts2 = inputParts2.copy();
-
-                outputParts2.setParent(outputDirPath);
+                outputParts2 = inputParts2.copy().withParent(outputDirPath);
             }
 
             outputParts1.getNameParts().add(cleanTag);
@@ -161,7 +157,7 @@ public class FastpController extends BaseTabController {
             PathParts outputParts1;
 
 
-            fastpTool.addOption(new ValueOption("--in1", input1));
+            fastpTool.addOption(new ValueOption("--in1", inputParts1.getLinuxPath()));
 
             if (inputParts1.getSuffix().equals("gz")) {
                 String newSuffix = newNames.remove(newNames.size() - 1);

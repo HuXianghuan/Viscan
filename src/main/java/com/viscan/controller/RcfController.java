@@ -3,6 +3,7 @@ package com.viscan.controller;
 import com.viscan.ConfigManager;
 import com.viscan.DragAcceptorsManual;
 import com.viscan.Utils.PathUtils;
+import com.viscan.path.LinuxPath;
 import com.viscan.alert.AppAlert;
 import com.viscan.tools.BaseTool;
 import com.viscan.tools.option.FlagOption;

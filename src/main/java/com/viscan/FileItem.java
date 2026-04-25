@@ -46,6 +46,9 @@ public class FileItem {
     }
 
     public String getLinuxPath() {
+        if (linuxPath == null && winPath != null) {
+            linuxPath = WslPathConverter.autoToLinuxString(winPath);
+        }
         return linuxPath;
     }
 

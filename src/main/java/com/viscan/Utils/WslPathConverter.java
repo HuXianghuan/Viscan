@@ -36,8 +36,7 @@ public final class WslPathConverter {
 
     public static Path stringToUncPath(String str) {
         if (str == null) return null;
-        // UNC 不要 Path.of 时丢掉分隔符信息
-        return Path.of(str.replace('/', '\\')); // 保留 UNC 格式兼容 Path
+        return Path.of(str.replace('/', '\\'));
     }
 
     // 自动识别
@@ -136,8 +135,9 @@ public final class WslPathConverter {
         return path.toString().replace('/', '\\');
     }
 
-
-
+    public static String windowsToLinuxString(Path winPath) {
+        return toLinuxString(windowsToMnt(winPath));
+    }
 
     public static String autoToLinuxString(String str) {
         if (str == null) return null;
@@ -152,7 +152,6 @@ public final class WslPathConverter {
         // ---- /mnt/ 驱动器路径 ----
         String unixLike = str.replace('\\', '/');
         if (MNT_PATH.matcher(unixLike).matches()) {
-            // 已经是 /mnt/x/... 格式
             return unixLike;
         }
 
@@ -217,11 +216,4 @@ public final class WslPathConverter {
         if (path == null) return WslPathType.UNKNOWN;
         return detectType(path.toString());
     }
-
-
-
-
-
-
-
 }

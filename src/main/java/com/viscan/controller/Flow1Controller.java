@@ -9,6 +9,8 @@ import com.viscan.DragAcceptorsManual;
 import com.viscan.Utils.PathParts;
 import com.viscan.Utils.PathUtils;
 import com.viscan.Utils.WslPathConverter;
+import com.viscan.path.LinuxPath;
+import com.viscan.path.WindowsPath;
 import com.viscan.alert.AppAlert;
 import com.viscan.tools.BaseTool;
 import com.viscan.tools.CommandPipeline;
@@ -247,19 +249,16 @@ public class Flow1Controller extends BaseTabController {
 
         CommandPipeline pipeline = new CommandPipeline();
 
-        Path projectDirPath = Path.of(projectDirField.getText());
-
-        String projectDirLinux = WslPathConverter.toLinuxString(projectDirPath.toAbsolutePath());
-
+        WindowsPath projectDirWin = new WindowsPath(projectDirField.getText());
+        LinuxPath projectDirLinux = projectDirWin.toMnt();
 
         String cleanTag = ConfigManager.getConfig().getFastpCleanTag();
         String unclassifiedTag = ConfigManager.getConfig().getKraken2UnclassifiedTag();
 
-
-        Path fastpOutPath = WslPathConverter.windowsToMnt(projectDirPath.resolve("fastp_out"));
-        Path krakenHostRemovalOutPath = WslPathConverter.windowsToMnt(projectDirPath.resolve("kraken2_host_remove_out"));
-        Path krakenClassifyOutPath = WslPathConverter.windowsToMnt(projectDirPath.resolve("kraken2_classify_out"));
-        Path recentrifugeOutPath = WslPathConverter.windowsToMnt(projectDirPath.resolve("recentrifuge_out"));
+        LinuxPath fastpOutPath = projectDirLinux.resolve("fastp_out");
+        LinuxPath krakenHostRemovalOutPath = projectDirLinux.resolve("kraken2_host_remove_out");
+        LinuxPath krakenClassifyOutPath = projectDirLinux.resolve("kraken2_classify_out");
+        LinuxPath recentrifugeOutPath = projectDirLinux.resolve("recentrifuge_out");
 
 
 
@@ -320,8 +319,8 @@ public class Flow1Controller extends BaseTabController {
                 fastpOutFiles.add(List.of(fastpOut1, fastpOut2));
 
                 BaseTool fastpTool = new BaseTool();
-                fastpTool.addOption(new ValueOption("--in1", input1));
-                fastpTool.addOption(new ValueOption("--in2", input2));
+                fastpTool.addOption(new ValueOption("--in1", inputParts1.getLinuxPath()));
+                fastpTool.addOption(new ValueOption("--in2", inputParts2.getLinuxPath()));
 
                 fastpTool.addOption(new ValueOption("--out1", fastpOut1));
                 fastpTool.addOption(new ValueOption("--out2", fastpOut2));
@@ -458,10 +457,9 @@ public class Flow1Controller extends BaseTabController {
             rcfTool.addOption(new ValueOption("--minscore", rcfMinScoreField.getText()));
             rcfTool.addOption(new ValueOption("--ctrlminscore", rcfControlMinScoreField.getText()));
 
-            rcfTool.addOption(new ValueOption("--outprefix", WslPathConverter.toLinuxString(recentrifugeOutPath.resolve(projectNameField.getText()))));
+            rcfTool.addOption(new ValueOption("--outprefix", recentrifugeOutPath.resolve(projectNameField.getText()).toString()));
 
             pipeline.add(rcfTool.buildCommandPretty(PathUtils.linuxJoin(ConfigManager.getConfig().getRecentrifugeExecutableDir(), "rcf")));
-
 
 
 
@@ -496,7 +494,7 @@ public class Flow1Controller extends BaseTabController {
                 fastpOutFiles.add(fastpOut);
 
                 BaseTool fastpTool = new BaseTool();
-                fastpTool.addOption(new ValueOption("--in1", input));
+                fastpTool.addOption(new ValueOption("--in1", inputParts.getLinuxPath()));
                 fastpTool.addOption(new ValueOption("--out1", fastpOut));
 
                 if (fastpDemandHtmlCheck.isSelected()) {
@@ -620,7 +618,7 @@ public class Flow1Controller extends BaseTabController {
             rcfTool.addOption(new ValueOption("--minscore", rcfMinScoreField.getText()));
             rcfTool.addOption(new ValueOption("--ctrlminscore", rcfControlMinScoreField.getText()));
 
-            rcfTool.addOption(new ValueOption("--outprefix", WslPathConverter.toLinuxString(recentrifugeOutPath.resolve(projectNameField.getText()))));
+            rcfTool.addOption(new ValueOption("--outprefix", recentrifugeOutPath.resolve(projectNameField.getText()).toString()));
 
             pipeline.add(rcfTool.buildCommandPretty(PathUtils.linuxJoin(ConfigManager.getConfig().getRecentrifugeExecutableDir(), "rcf")));
 
@@ -657,7 +655,7 @@ public class Flow1Controller extends BaseTabController {
                     StandardCharsets.UTF_8
             );
 
-            scriptPathLinux = WslPathConverter.toLinuxString(WslPathConverter.windowsToMnt(script));
+            scriptPathLinux = new WindowsPath(script.toAbsolutePath().toString()).toMnt().toString();
 
 
         } catch (IOException e) {

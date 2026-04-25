@@ -4,6 +4,7 @@ import com.viscan.controller.MainController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -20,6 +21,9 @@ public class Main extends Application {
                 getClass().getResource("/com/viscan/css/listview.css").toExternalForm()
         );
         primaryStage.setTitle("Viscan");
+        primaryStage.getIcons().add(new Image(
+                getClass().getResourceAsStream("/com/viscan/images/icon.png")
+        ));
         primaryStage.setScene(scene);
         primaryStage.show();
 
